@@ -1,1 +1,1 @@
-# hyper-structure
+# HyperStructure
