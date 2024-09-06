@@ -389,7 +389,7 @@ var cnPrefix = {
     "[HARDWARE]": "[硬件]",
     "data X: ": "数据 X: ",
     "each resource: x": "每种资源: x",
-    "tickspeed X:  ": "tick速度 X:  ",
+    "tickspeed X: ": "tick速度 X: ",
     "": "",
     "": "",
     "": "",
