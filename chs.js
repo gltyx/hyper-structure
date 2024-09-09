@@ -422,7 +422,7 @@ var cnPrefix = {
     "Asteroid Enchancer": "小行星增强器",
     "other components's effects are boosted based on this components level ": "其他组件的效果会基于该组件等级而提升 ",
     "[Synergy]": "[协同]",
-    "Energy/s x: ": "能量/秒 x: ",
+    "Energy/s x:": "能量/秒 x:",
     "": "",
     "": "",
     "": "",
