@@ -1,38 +1,81 @@
 //control + shift + f: auto indent 
 
 
+class gameData {
+  cells = 0;
+  energy = 100;
+  tickSpeed = 1.5;
+  lastTick = Date.now();
+  // Aggiungi altre proprietà se necessario
 
-let gameData = [{
-  cells: 0,
-  cellsProd: 0,
-  cellsProdActive: false,
-  data: 0,
-  dataProd: 0,
-  dataProdActive: false,
-  energy: 0,
-  energyProd: 0,
-  energyMax: 0,
-  energyProdActive: false,
+  arrays = [
+    { key1: 'value1', key2: 'value2' },
+    { key3: 'value3', key4: 'value4' }
+  ];
 
-  tickSpeed: 1000,
-  tickSpeedProd: 0,
-  tickSpeedProdActive: false,
+  // Metodo per esportare automaticamente tutte le proprietà attuali
+  exportData() {
+    const data = {};
+    
+    // Serializza dinamicamente tutte le proprietà dell'istanza
+    Object.getOwnPropertyNames(this).forEach((prop) => {
+      data[prop] = this[prop];  // Copia la proprietà e il valore corrente
+    });
 
-  tickspeed3: 1,
-  tickspeed4: 1,
+    return JSON.stringify(data);
+  }
 
-  offProgressLimit: 1800,
+  importData(data) {
+    console.log(data)
+    const parsedData = JSON.parse(data);
+    Object.entries(parsedData).forEach(([key, value]) => {
+      this[key] = value;
+    });
+  }
+}
 
-  lastTick: Date.now(),
+class Persona {
+  constructor(nome, età, amici, indirizzi) {
+      this.nome = nome;
+      this.età = età;
+      this.amici = amici; // array di nomi
+      this.indirizzi = indirizzi; // array di oggetti con via e città
+  }
 
-  explorationResource1: 0,
-  explorationResource1Prod: 0,
-  explorationResource1ProdActive: false,
+  // Metodo per salvare i dati nella memoria locale
+  salva() {
+      // Ottieni tutte le proprietà dell'istanza
+      const dati = {};
+      for (let key of Object.keys(this)) {
+          dati[key] = this[key];
+      }
+      localStorage.setItem('personaData', JSON.stringify(dati));
+  }
 
-  topProgressCount: 0,
+  // Metodo per caricare i dati dalla memoria locale
+  static carica() {
+      const dati = localStorage.getItem('personaData');
+      if (dati) {
+          const parsedData = JSON.parse(dati);
+          // Crea una nuova istanza e imposta le proprietà
+          const istanza = new Persona();
+          Object.assign(istanza, parsedData);
+          return istanza;
+      }
+      return null; // o puoi restituire un'istanza predefinita
+  }
+}
 
-  init1: true,
-}]
+// Utilizzo della classe
+
+// Creare un'istanza di Persona e salvarla
+const persona = new Persona('Mario', 30, ['Luca', 'Anna'], [{via: 'Via Roma', città: 'Roma'}, {via: 'Via Milano', città: 'Milano'}]);
+persona.salva();
+
+// Caricare l'istanza di Persona
+const personaCaricata = Persona.carica();
+console.log(personaCaricata);
+
 
 //ACCEPTED
 let componentsEquipped = [
@@ -3080,7 +3123,6 @@ document.getElementById("reallocateEnergy2").onclick = function () {
   manualVisualLoop()
 }
 
-/*
 function buy(array, price, arrayEffector, effector, value) {
   const priceIdentity = getNotIf(array, null, price + "Identity");
   const activePrice = getNotIf(array, null, price);
@@ -3094,7 +3136,6 @@ function buy(array, price, arrayEffector, effector, value) {
   }
   return false;
 }
-  */
 
 function buyNoPrice(array, price, arrayEffector, effector, value) {
   const priceIdentity = getNotIf(array, null, price + "Identity");
@@ -4242,7 +4283,7 @@ function exportSave() {
 
 }
 
-
+/*
 function importSave() {
   var encryptedData = document.getElementById("Save").value;
   var decryptedData = CryptoJS.AES.decrypt(encryptedData, secretKey);
@@ -4285,6 +4326,7 @@ function importSave() {
     Rautomation = savedGameData.Rautomation;
     Rshowable = savedGameData.Rshowable
 }
+    */
 
 function manualSave() {
   var savedGameData = JSON.parse(localStorage.getItem("HyperStructureSave"));
